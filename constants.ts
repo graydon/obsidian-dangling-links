@@ -1,0 +1,1 @@
+export const VIEW_TYPE_DANGLING_LINKS = "dangling-links";
