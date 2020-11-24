@@ -1,5 +1,5 @@
 import Dangling from "./Dangling.svelte"
-import { ItemView, WorkspaceLeaf, TFile, iterateCacheRefs, MetadataCache, ReferenceCache, CachedMetadata, MarkdownSourceView, MarkdownView } from 'obsidian';
+import { ItemView, WorkspaceLeaf, TFile, CachedMetadata, MarkdownView } from 'obsidian';
 import { VIEW_TYPE_DANGLING_LINKS } from "./constants"
 import Dangle from "./dangle"
 
@@ -18,12 +18,15 @@ export default class DanglingLinksView extends ItemView {
 		this.registerEvent(this.app.workspace.on("quick-preview", this.redraw));
 		this.registerEvent(this.app.vault.on("delete", this.redraw));
 	}
-	getViewType(): string {
+
+    getViewType(): string {
 		return VIEW_TYPE_DANGLING_LINKS;
 	}
-	getDisplayText(): string {
+
+    getDisplayText(): string {
         return "Dangling links";
     }
+
     getIcon(): string {
         return "broken-link";
 	}
