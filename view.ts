@@ -1,5 +1,5 @@
 import Dangling from "./Dangling.svelte"
-import { ItemView, WorkspaceLeaf, TFile, CachedMetadata, MarkdownView } from 'obsidian';
+import { ItemView, WorkspaceLeaf, TFile, CachedMetadata, MarkdownView, getLinkpath } from 'obsidian';
 import { VIEW_TYPE_DANGLING_LINKS } from "./constants"
 import Dangle from "./dangle"
 
@@ -64,11 +64,6 @@ export default class DanglingLinksView extends ItemView {
 
     getDanglingLinks(): Map<string, Dangle[]> {
         // const con = require('electron').remote.getGlobal('console')
-        let allFiles: Set<string> = new Set();
-        for (let file of this.app.vault.getMarkdownFiles()) {
-            // con.log(`have target for ${file.basename}`);
-            allFiles.add(file.basename)
-        }
 
         let danglingLinks: Map<string, Dangle[]> = new Map();
         for (let file of this.app.vault.getMarkdownFiles()) {
@@ -76,8 +71,17 @@ export default class DanglingLinksView extends ItemView {
             let dangles: Dangle[] = [];
             if (meta.links) {
                 for (let link of meta.links) {
+
+                    // Change `SomeTargetFile#Heading` => `SomeTargetFile`
+                    let linkPath = getLinkpath(link.link);
+
+                    // Try to resolve `SomeTargetFile` from context of file.path
+                    let target:TFile = this.app.metadataCache
+                                           .getFirstLinkpathDest(linkPath,
+                                                                 file.path)
+
                     //con.log(`examining link ${link.link} in ${file.path}`);
-                    if (!allFiles.has(link.link))
+                    if (target == null)
                     {
                         // con.log(`found dangling link ${link.link} in ${file.path}`);
                         dangles.push(new Dangle(link.link, link.position.start.line,
