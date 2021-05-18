@@ -1,6 +1,6 @@
 {
   "name": "obsidian-dangling-links",
-  "version": "0.0.2",
+  "version": "0.3.0",
   "description": "This is a sample plugin for Obsidian (https://obsidian.md)",
   "main": "main.js",
   "scripts": {
