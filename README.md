@@ -1,5 +1,7 @@
 # obsidian-dangling-links
 
+![Obsidian Dangling Links demo](assets/overview.gif?raw=true)
+
 This is a small plugin for [Obsidian](http://obsidian.md) that displays the set
 of dangling links in your current vault in a side-panel -- links you've put in
 a note somewhere that don't currently point to anything in the vault.
@@ -11,18 +13,12 @@ with.
 ## Usage
 
 The panel is accessed with the "Dangling links: Open view" command, or by
-clicking the broken-link ribbon icon. Dangling links are grouped by the file
-they occur in, and you can click each occurrence (unfortunately you must click
-_twice_) to navigate to it.
+clicking the broken-link ribbon icon. Dangling links can be grouped by the
+file or folder they occur in, or can be shown as a list of dangling links and
+their reference and you can click each occurrence to navigate to it.
 
-## Bugs
-
-  - You have to click on each occurrence twice to scroll to the right line.
-  - You have to make one edit _after_ fixing a dangling link before the list of
-    dangling links will update.
-
-I have no idea why either of these bugs exist but UI programming is a bit of a
-mystery to me in general. Patches welcome.
+You are also able to collapse each item or ignore complete folders from the
+settings page.
 
 ## Compatibility
 
