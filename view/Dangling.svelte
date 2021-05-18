@@ -1,6 +1,7 @@
 <script lang="ts">
 
-    import { afterUpdate, onDestroy } from "svelte";
+    import { log } from "console";
+import { afterUpdate, onDestroy } from "svelte";
     import type { Sortable } from "../controller/navigationItem";
     import type DanglingNavigationItem from "../controller/navigationItem";
     import type Dangle from "../model/dangle"
@@ -40,7 +41,8 @@
         init();
     }
 
-    function expand(index) {
+    function expand(event, index) {
+        if(event.target.tagName != "SUMMARY") { return; }
         if(settings.reducedIndices.contains(index)) {
             settings.reducedIndices.remove(index);
         } else {
@@ -69,7 +71,7 @@
 <h3>Dangling links</h3>
 
 {#each dangling as [index, dangles], cnt}
-<details bind:this="{details[cnt]}" id="{index}" on:click={() => expand(index)}>
+<details bind:this="{details[cnt]}" id="{index}" on:click={(event) => {expand(event, index) } }>
 
     <summary>{index}</summary>
         <ul>
